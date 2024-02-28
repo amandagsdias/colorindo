@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo de Adivinhe a Cor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #color-box {
+        width: 200px;
+        height: 200px;
+        margin: 50px auto;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #color-name {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Jogo de Adivinhe a Cor</h1>
+    <div id="color-box">
+      <div id="color-name">Azul</div>
+    </div>
+    <form id="guess-form">
+      <label for="color-guess">Digite o nome da cor:</label>
+      <input type="text" id="color-guess" name="color-guess" />
+      <button type="submit">Verificar</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+      const colorBox = document.getElementById("color-box");
+      const colorName = document.getElementById("color-name");
+      const guessForm = document.getElementById("guess-form");
+      const colorGuessInput = document.getElementById("color-guess");
+      const resultDiv = document.getElementById("result");
+
+      // Cores possíveis
+      const colors = [
+        "Vermelho",
+        "Verde",
+        "Azul",
+        "Amarelo",
+        "Roxo",
+        "Laranja",
+      ];
+
+      // Escolher uma cor aleatória
+      let randomColorIndex = Math.floor(Math.random() * colors.length);
+      let correctColor = colors[randomColorIndex];
+      colorName.textContent = correctColor;
+
+      // Lógica de verificação
+      guessForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let guess = colorGuessInput.value.trim();
+        if (guess.toLowerCase() === correctColor.toLowerCase()) {
+          resultDiv.textContent = "Correto! Parabéns!";
+          resultDiv.style.color = "green";
+        } else {
+          resultDiv.textContent = "Incorreto. Tente novamente.";
+          resultDiv.style.color = "red";
+        }
+      });
+    </script>
+  </body>
+</html>
